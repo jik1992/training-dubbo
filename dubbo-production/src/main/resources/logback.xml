@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_dir}/trace/trace.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}/trace/trace.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+            <maxHistory>72</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.raycloyud.express.monitor.logback.layout.QuicloudMonitorLayout"/>
+        </encoder>
+    </appender>
+    <logger name="com.raycloud.express.monitor.dubbo.filter.DubboInvokeTraceFilter" level="TRACE">
+        <appender-ref ref="rollingFile"/>
+    </logger>
+    <logger name="com.raycloyud.express.monitor.trace.http.QuicloudMonitorFilter" level="TRACE">
+        <appender-ref ref="rollingFile"/>
+    </logger>
+    <logger name="com.quicloud" level="INFO">
+        <appender-ref ref="rollingFile"/>
+    </logger>
+
+</configuration>

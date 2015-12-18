@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+    <!--主配置-->
+    <dubbo:application name="demo-dubbo"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+    <!--生产-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <bean id="dubboServiceImpl" class="com.quicloud.DubboSerivceImpl"/>
+
+    <dubbo:service interface="com.quicloud.DubboService" ref="dubboServiceImpl" filter="qui_trace" />
+
+
+</beans>
