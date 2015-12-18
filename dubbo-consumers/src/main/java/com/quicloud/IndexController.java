@@ -1,6 +1,8 @@
 package com.quicloud;
 
 
+import com.raycloud.express.monitor.logback.helper.QuicloudMonitorHelper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,27 +12,28 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import javax.annotation.Resource;
-
 /**
  * Created by ZuoYun on 12/10/15. Time: 6:42 PM Information:
  */
 @RestController("/")
 public class IndexController {
 
-  @Resource
-  DubboService service;
-
-
   Logger log = LoggerFactory.getLogger(this.getClass());
 
+  //  @Resource
+//  NameDao dao;
+//
   @RequestMapping("/index")
   @ResponseBody
   public Object index() throws SocketException, UnknownHostException {
-    log.info("消费者测试");
+    return null;
+  }
 
-//    throw new IllegalArgumentException("xxxx");
-    return service.hello();
+  @RequestMapping("/dubbo")
+  @ResponseBody
+  public Object dubbo() throws SocketException, UnknownHostException {
+    QuicloudMonitorHelper.setMessage("xxxxx").send();
+    return "finish";
   }
 
 }

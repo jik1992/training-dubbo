@@ -28,7 +28,7 @@
 
     <filter>
         <filter-name>monitor</filter-name>
-        <filter-class>com.raycloyud.express.monitor.trace.http.QuicloudMonitorFilter</filter-class>
+        <filter-class>com.raycloud.express.monitor.trace.http.QuicloudMonitorFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>monitor</filter-name>
