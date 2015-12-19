@@ -1,7 +1,8 @@
 package com.quicloud;
 
 
-import com.raycloyud.express.monitor.logback.helper.QuicloudMonitorHelper;
+import com.raycloud.express.monitor.logback.helper.QuicloudMonitorFormatter;
+import com.raycloud.express.monitor.logback.helper.QuicloudMonitorTracer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,18 +18,19 @@ public class DubboSerivceImpl implements DubboService {
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
   public String hello() {
-    logger.info("生产者测试");
-    logger.info(
-        QuicloudMonitorHelper
-            .setMessage("yyy")
-            .setSpendTime(222L)
-            .setEvent("生产者事件")
-            .setEventExtra("索引1")
-            .setEventExtra("索引2")
-            .setEventExtra("索引3")
-            .setEventExtra("索引4")
-            .setKeyValue("a", "b")
-            .setEventExtra("额外事件2").build());
+    QuicloudMonitorTracer.send("生产者测试");
+    QuicloudMonitorTracer.send(QuicloudMonitorFormatter
+                                   .setMessage("yyy")
+                                   .setSpendTime(222L)
+                                   .setEvent("生产者事件")
+                                   .setEvent("索引1")
+                                   .setEvent("索引2")
+                                   .setEvent("索引3")
+                                   .setEvent("索引4")
+                                   .setKeyValue("a", "b")
+                                   .setEvent("额外事件2")
+                                   .format());
+
     return "finish";
   }
 }

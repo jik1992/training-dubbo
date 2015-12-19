@@ -90,7 +90,7 @@
         <dependency>
             <groupId>com.raycloud.express</groupId>
             <artifactId>quicloud-express-monitor-dubbo-filter</artifactId>
-            <version>1.4-SNAPSHOT</version>
+            <version>1.7-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>javax.servlet-api</artifactId>

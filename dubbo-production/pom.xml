@@ -13,8 +13,6 @@
 
 
     <dependencies>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -65,7 +63,7 @@
         <dependency>
             <groupId>com.raycloud.express</groupId>
             <artifactId>quicloud-express-monitor-dubbo-filter</artifactId>
-            <version>1.2-SNAPSHOT</version>
+            <version>1.7-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>javax.servlet-api</artifactId>
@@ -112,7 +110,6 @@
             <url>http://repo.spring.io/milestone</url>
         </repository>
     </repositories>
-
 
 
     <build>

@@ -1,4 +1,4 @@
-package com.quicloud.domain;
+package com.quicloud.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
