@@ -6,6 +6,8 @@ import com.quicloud.dao.NameDao;
 import com.quicloud.dao.NamePageDao;
 import com.raycloud.express.monitor.logback.helper.QuicloudMonitorFormatter;
 import com.raycloud.express.monitor.logback.helper.QuicloudMonitorTracer;
+import com.raycloud.express.monitor.reporter.QuicloudMonitorMetrics;
+import com.raycloud.express.monitor.trace.QuicloudMonitorContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +39,8 @@ public class IndexController {
   @ResponseBody
   public Object index() throws SocketException, UnknownHostException {
     dao.save(new Name().setName("左韵"));
+    QuicloudMonitorContext.INSTALL.put("测试上下文","xxx");
+    logger.info("xxxx {}", new Long(111));
     return dao.findByName("左韵");
   }
 
@@ -50,8 +54,25 @@ public class IndexController {
   @RequestMapping("/dubbo")
   @ResponseBody
   public Object dubbo() throws SocketException, UnknownHostException {
-    logger.info("你好");
-    QuicloudMonitorTracer.send(QuicloudMonitorFormatter.setMessage("消费者事件").setEvent("消费者").format());
+
+    QuicloudMonitorContext.INSTALL.init();
+    QuicloudMonitorContext.INSTALL.put("测试上下文","xxx");
+
+
+
+    QuicloudMonitorTracer.send(QuicloudMonitorFormatter
+                                   .setMessage("标题")
+                                   .setEvent("第一个维度")
+                                   .setEvent("第二个维度")
+                                   .setKeyValue("第一个指标",111L)
+                                   .setKeyValue("第二个指标",111L)
+                                   .setSpendTime(222L)
+                                   .format());
+
+    QuicloudMonitorMetrics.counter("第一指标","第二指标");
+
+    logger.error("xxxx");
+    logger.trace("xxxx");
     return service.hello();
   }
 

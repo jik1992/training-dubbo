@@ -19,23 +19,18 @@
             <fileNamePattern>/data/logs/logstash/trace/trace.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
             <maxHistory>72</maxHistory>
         </rollingPolicy>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>TRACE</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
         <layout class="com.raycloud.express.monitor.logback.layout.QuicloudMonitorLayout"/>
     </appender>
 
     <appender name="errorMonitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>/data/logs/logstash/error/error.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/data/logs/logstash/error/error.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>72</maxHistory>
-        </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>ACCEPT</onMatch>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/data/logs/logstash/error/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>72</maxHistory>
+            </rollingPolicy>
             <onMismatch>DENY</onMismatch>
         </filter>
         <layout class="com.raycloud.express.monitor.logback.layout.QuicloudMonitorLayout"/>
@@ -44,11 +39,13 @@
     <logger name="com.raycloud.express.monitor.logback.helper.QuicloudMonitorTracer" level="TRACE" addtivity="false">
         <appender-ref ref="monitor"/>
     </logger>
-
+    <logger name="com.quicloud">
+        <appender-ref ref="monitor"/>
+    </logger>
 
 
     <root level="INFO">
-        <!--<appender-ref ref="errorMonitor"/>-->
+        <appender-ref ref="errorMonitor"/>
         <appender-ref ref="console"/>
     </root>
 

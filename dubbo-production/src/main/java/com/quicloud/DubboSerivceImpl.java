@@ -2,7 +2,7 @@ package com.quicloud;
 
 
 import com.raycloud.express.monitor.logback.helper.QuicloudMonitorFormatter;
-import com.raycloud.express.monitor.logback.helper.QuicloudMonitorTracer;
+import com.raycloud.express.monitor.trace.QuicloudMonitorContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,18 +18,12 @@ public class DubboSerivceImpl implements DubboService {
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
   public String hello() {
-    QuicloudMonitorTracer.send("生产者测试");
-    QuicloudMonitorTracer.send(QuicloudMonitorFormatter
-                                   .setMessage("yyy")
-                                   .setSpendTime(222L)
-                                   .setEvent("生产者事件")
-                                   .setEvent("索引1")
-                                   .setEvent("索引2")
-                                   .setEvent("索引3")
-                                   .setEvent("索引4")
-                                   .setKeyValue("a", "b")
-                                   .setEvent("额外事件2")
-                                   .format());
+    logger.info("你好");
+    QuicloudMonitorContext.INSTALL.init();
+    logger
+        .info(QuicloudMonitorFormatter.setMessage("测试").setEvent("事件一").setEvent("消费时间").setSpendTime(1000L).format());
+    logger.error("xxxx");
+    logger.trace("xxxx");
 
     return "finish";
   }

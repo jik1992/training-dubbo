@@ -1,5 +1,7 @@
 package com.quicloud.log4j.factory;
 
+import com.raycloud.express.monitor.trace.http.QuicloudMonitorListener;
+
 import org.iq80.leveldb.impl.LogWriter;
 import org.iq80.leveldb.util.Slice;
 import org.junit.Test;
@@ -34,7 +36,6 @@ public class QuicloudMonitorLocalListenerTest {
     });
 
     Thread.sleep(2000L);
-
     new QuicloudMonitorLocalListener().run();
 
 
