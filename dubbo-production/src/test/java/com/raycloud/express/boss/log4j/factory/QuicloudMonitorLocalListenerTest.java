@@ -1,6 +1,4 @@
-package com.quicloud.log4j.factory;
-
-import com.raycloud.express.monitor.trace.http.QuicloudMonitorListener;
+package com.raycloud.express.boss.log4j.factory;
 
 import org.iq80.leveldb.impl.LogWriter;
 import org.iq80.leveldb.util.Slice;

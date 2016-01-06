@@ -1,4 +1,4 @@
-package com.quicloud.log4j.factory;
+package com.raycloud.express.boss.log4j.factory;
 
 
 import redis.clients.jedis.Jedis;

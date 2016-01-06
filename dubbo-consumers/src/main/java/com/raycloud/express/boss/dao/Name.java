@@ -1,4 +1,4 @@
-package com.quicloud.dao;
+package com.raycloud.express.boss.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

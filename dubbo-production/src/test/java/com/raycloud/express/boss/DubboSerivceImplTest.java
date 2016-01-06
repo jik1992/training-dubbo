@@ -1,4 +1,4 @@
-package com.quicloud;
+package com.raycloud.express.boss;
 
 import org.apache.log4j.Logger;
 import org.iq80.leveldb.impl.LogConstants;

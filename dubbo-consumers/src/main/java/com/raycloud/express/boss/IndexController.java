@@ -1,9 +1,8 @@
-package com.quicloud;
+package com.raycloud.express.boss;
 
 
-import com.quicloud.dao.Name;
-import com.quicloud.dao.NameDao;
-import com.quicloud.dao.NamePageDao;
+import com.raycloud.express.boss.dao.NameDao;
+import com.raycloud.express.boss.dao.NamePageDao;
 import com.raycloud.express.monitor.logback.helper.QuicloudMonitorFormatter;
 import com.raycloud.express.monitor.logback.helper.QuicloudMonitorTracer;
 import com.raycloud.express.monitor.reporter.QuicloudMonitorMetrics;
@@ -38,10 +37,9 @@ public class IndexController {
   @RequestMapping("/index")
   @ResponseBody
   public Object index() throws SocketException, UnknownHostException {
-    dao.save(new Name().setName("左韵"));
-    QuicloudMonitorContext.INSTALL.put("测试上下文","xxx");
-    logger.info("xxxx {}", new Long(111));
-    return dao.findByName("左韵");
+    QuicloudMonitorContext.INSTALL.put("测试上下文", "xxx");
+    QuicloudMonitorTracer.send("Xxxxxx");
+    return "hello world";
   }
 
   @RequestMapping("/index2")
@@ -56,20 +54,18 @@ public class IndexController {
   public Object dubbo() throws SocketException, UnknownHostException {
 
     QuicloudMonitorContext.INSTALL.init();
-    QuicloudMonitorContext.INSTALL.put("测试上下文","xxx");
-
-
+    QuicloudMonitorContext.INSTALL.put("测试上下文", "xxx");
 
     QuicloudMonitorTracer.send(QuicloudMonitorFormatter
                                    .setMessage("标题")
                                    .setEvent("第一个维度")
                                    .setEvent("第二个维度")
-                                   .setKeyValue("第一个指标",111L)
-                                   .setKeyValue("第二个指标",111L)
+                                   .setKeyValue("第一个指标", 111L)
+                                   .setKeyValue("第二个指标", 111L)
                                    .setSpendTime(222L)
                                    .format());
 
-    QuicloudMonitorMetrics.counter("第一指标","第二指标");
+    QuicloudMonitorMetrics.counter("第一指标", "第二指标");
 
     logger.error("xxxx");
     logger.trace("xxxx");

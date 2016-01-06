@@ -15,8 +15,8 @@
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
     <!--消费-->
-    <dubbo:reference id="dubboService" interface="com.quicloud.DubboService" check="false"
-                     timeout="5000"  filter="qui_trace"/>
+    <dubbo:reference id="dubboService" interface="com.raycloud.express.boss.DubboService" check="false"
+                     timeout="5000" filter="qui_trace"/>
 
 
 </beans>

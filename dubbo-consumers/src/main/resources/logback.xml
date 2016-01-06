@@ -12,40 +12,73 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} %line - %msg%n</pattern>
         </encoder>
     </appender>
+
+
     <!--QuicloudMonitor-->
     <appender name="monitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/data/logs/logstash/trace/trace.log</file>
+        <file>/data/logs/logstash/trace/${monitor.appName}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/data/logs/logstash/trace/trace.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
-            <maxHistory>72</maxHistory>
+            <fileNamePattern>/data/logs/logstash/trace/${monitor.appName}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-        <layout class="com.raycloud.express.monitor.logback.layout.QuicloudMonitorLayout"/>
-    </appender>
-
-    <appender name="errorMonitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/data/logs/logstash/error/error.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
+            <level>TRACE</level>
             <onMatch>ACCEPT</onMatch>
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>/data/logs/logstash/error/error.%d{yyyy-MM-dd}.log</fileNamePattern>
-                <maxHistory>72</maxHistory>
-            </rollingPolicy>
             <onMismatch>DENY</onMismatch>
         </filter>
         <layout class="com.raycloud.express.monitor.logback.layout.QuicloudMonitorLayout"/>
     </appender>
-     
+
+    <appender name="infoMonitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/logstash/info/${monitor.appName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/logstash/info/${monitor.appName}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <layout class="com.raycloud.express.monitor.logback.layout.QuicloudMonitorLayout"/>
+    </appender>
+
+    <appender name="errorMonitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/logstash/error/${monitor.appName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/logstash/error/${monitor.appName}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <layout class="com.raycloud.express.monitor.logback.layout.QuicloudMonitorLayout"/>
+    </appender>
+
+
     <logger name="com.raycloud.express.monitor.logback.helper.QuicloudMonitorTracer" level="TRACE" addtivity="false">
         <appender-ref ref="monitor"/>
     </logger>
-    <logger name="com.quicloud">
-        <appender-ref ref="monitor"/>
-    </logger>
+    <!--QuicloudMonitor END -->
 
 
     <root level="INFO">
         <appender-ref ref="errorMonitor"/>
+        <appender-ref ref="infoMonitor"/>
         <appender-ref ref="console"/>
     </root>
 

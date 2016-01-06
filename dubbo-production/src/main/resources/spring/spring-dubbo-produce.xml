@@ -14,9 +14,9 @@
     <!--生产-->
     <dubbo:protocol name="dubbo" port="20880"/>
 
-    <bean id="dubboServiceImpl" class="com.quicloud.DubboSerivceImpl"/>
+    <bean id="dubboServiceImpl" class="com.raycloud.express.boss.DubboSerivceImpl"/>
 
-    <dubbo:service interface="com.quicloud.DubboService" ref="dubboServiceImpl" filter="qui_trace" />
+    <dubbo:service interface="com.raycloud.express.boss.DubboService" ref="dubboServiceImpl" filter="qui_trace" />
 
 
 </beans>

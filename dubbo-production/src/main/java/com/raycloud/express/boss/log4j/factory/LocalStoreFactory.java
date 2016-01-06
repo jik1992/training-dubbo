@@ -1,4 +1,4 @@
-package com.quicloud.log4j.factory;
+package com.raycloud.express.boss.log4j.factory;
 
 import org.iq80.leveldb.impl.LogMonitor;
 import org.iq80.leveldb.impl.LogReader;

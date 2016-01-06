@@ -1,4 +1,4 @@
-package com.quicloud;
+package com.raycloud.express.boss;
 
 import com.google.common.collect.Lists;
 

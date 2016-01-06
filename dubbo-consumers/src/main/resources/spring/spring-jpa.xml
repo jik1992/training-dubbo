@@ -9,7 +9,7 @@
      http://www.springframework.org/schema/tx
      http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 
-    <jpa:repositories base-package="com.quicloud.dao"/>
+    <jpa:repositories base-package="com.raycloud.express.boss"/>
 
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
@@ -49,7 +49,7 @@
         <property name="persistenceProvider" ref="persistenceProvider"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
         <property name="jpaDialect" ref="jpaDialect"/>
-        <property name="packagesToScan" value="com.quicloud.dao"/>
+        <property name="packagesToScan" value="com.raycloud.express.boss.dao"/>
 
         <property name="jpaProperties">
             <props>

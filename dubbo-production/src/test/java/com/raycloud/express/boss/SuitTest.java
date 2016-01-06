@@ -1,4 +1,4 @@
-package com.quicloud;
+package com.raycloud.express.boss;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
